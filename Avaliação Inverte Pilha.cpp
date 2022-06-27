@@ -1,0 +1,107 @@
+#include <iostream>
+#include <windows.h>
+#define MAX 10
+
+using namespace std;
+
+int main(){
+    int Portugues = 65001;
+    int LinguaPadrao = GetConsoleOutputCP();
+    SetConsoleOutputCP(Portugues);
+    int topo = -1, pilha[MAX], fila[MAX], fim = -1, i, j, op;
+
+        do
+    {
+        system("cls");
+        cout << "* * * * * MENU * * * * *\n\n";
+        cout << "\n1 - Push";
+        cout << "\n2 - Pop";
+        cout << "\n3 - Inverte Pilha";
+        cout << "\n4 - Imprime";
+        cout << "\n9 - Sair";
+        cout << "\n\nDigite a sua opção: ";
+        cin >> op;
+
+        switch (op)
+        {
+            case 1 : system("cls");
+            cout << "* * * * * PUSH * * * * *\n\n";
+                if (topo < MAX - 1){
+                    topo++;
+                    cout << "\nDigite o elemento a ser inserido: ";
+                    cin >> pilha[topo];
+                    cout << "\nElemento inserido com sucesso\n\n";  
+                }
+                else
+                    cout << "Impossivel inserir, a pilha está cheia.\n\n";
+                    system("pause");
+                    break;
+                
+            case 2 : system("cls");
+            cout << "* * * * * POP * * * * *\n\n";
+                if (topo >= 0){
+                    cout << "Elemento excluido: " << pilha[topo] << "\n";
+                    topo--;
+                    cout << "\nElemento removido com sucesso\n\n";
+                    
+                }
+                else
+                    cout << "\nImpossivel remover, a pilha está vazia.";
+                    system("pause");
+                    break;
+
+            case 3 : system("cls");
+            cout << "* * * * * INVERTE PILHA * * * * *\n\n";
+                if (topo >=0){
+                    for (i = topo; i >= 0; i--)
+                    //Armazena os itens da pilha em ordem invertida dentro da lista
+                    {
+                        fim++;
+                    //Fim se tornará uma variável substituta para topo
+                        fila[fim] = pilha[i];
+                    }
+                    //Reinicia o valor de topo para que os itens sejam adicionados no começo da pilha
+                    topo = -1;
+
+                    for (j = 0; j <= fim; j++)
+                    //Armazena os itens de fila dentro da pilha
+                    {
+                        topo++;
+                    //Topo retornará ao seu valor original dentro desse laço
+                        pilha[topo] = fila[j];
+                        
+                    }
+                    //Reinicia o valor de fim para que a função "Inverte Pilha" possa ser usada novamente
+                    fim = -1;
+                    cout << "\n\nPilha invertida com sucesso\n\n";
+                    system ("pause");
+                    break;
+                }
+                else{
+                    cout << "\n\nA pilha está vazia.\n\n";
+                    system("pause");
+                    break;
+                }
+
+            case 4 : system("cls");
+            cout << "* * * * * IMPRIME * * * * *\n\n";
+                if (topo >=0){
+                    for(i = topo;i >= 0; i--){
+                        cout <<"\t" << pilha[i] << "\n";
+                    }
+                    cout << "\n\n";
+                    system("pause");
+                }
+                else{
+                    cout << "\n\nA pilha está vazia.\n\n";
+                    system("pause");
+                    break;
+                }
+
+        }
+
+    } while (op != 9);
+
+    SetConsoleOutputCP(LinguaPadrao);
+    return 0;
+}
